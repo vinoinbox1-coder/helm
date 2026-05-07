@@ -22,3 +22,6 @@ replicaCount: 1
 
 vpa:
   enabled: false
+
+serviceMonitor:
+  enabled: false

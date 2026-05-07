@@ -19,3 +19,6 @@ extraArgs:
   skip-nodes-with-local-storage: false
 
 replicaCount: 1
+
+vpa:
+  enabled: false

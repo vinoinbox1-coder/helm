@@ -28,3 +28,6 @@ serviceMonitor:
 
 service:
   create: true
+
+prometheusRule:
+  enabled: false

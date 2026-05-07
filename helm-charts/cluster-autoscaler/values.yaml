@@ -25,3 +25,6 @@ vpa:
 
 serviceMonitor:
   enabled: false
+
+service:
+  create: true

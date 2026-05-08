@@ -10,7 +10,7 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
 
   className: alb
 
@@ -18,6 +18,10 @@ ingress:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
 
-  host: nginx.yourdomain.com
+  hosts:
+    - host: nginx.yourdomain.com
+      paths:
+        - path: /
+          pathType: Prefix
 
 resources: {}

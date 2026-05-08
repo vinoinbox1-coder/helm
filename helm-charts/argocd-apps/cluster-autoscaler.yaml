@@ -9,21 +9,32 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/vinoinbox1-coder/helm.git 
+    repoURL: https://github.com/vinoinbox1-coder/helm.git
     targetRevision: HEAD
     path: helm-charts/cluster-autoscaler
 
     helm:
       values: |
-        awsRegion: us-west-2
+        awsRegion: us-east-1
+
+        cloudProvider: aws
 
         autoDiscovery:
           clusterName: prod-eks-cluster
 
         rbac:
           serviceAccount:
+            create: true
+            name: cluster-autoscaler
             annotations:
-              eks.amazonaws.com/role-arn: arn:aws:iam::992566513680:role/cluster-autoscaler
+              eks.amazonaws.com/role-arn: arn:aws:iam::757933576142:role/cluster-autoscaler
+
+        extraArgs:
+          balance-similar-node-groups: "true"
+          skip-nodes-with-system-pods: "false"
+          skip-nodes-with-local-storage: "false"
+          expander: least-waste
+
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system

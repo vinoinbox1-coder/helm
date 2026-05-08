@@ -10,8 +10,14 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  className: nginx
-  host: nginx.local
+  enabled: true
+
+  className: alb
+
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+
+  host: nginx.yourdomain.com
 
 resources: {}

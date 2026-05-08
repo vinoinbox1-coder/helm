@@ -10,20 +10,20 @@ spec:
 
   source:
     repoURL: https://github.com/vinoinbox1-coder/helm.git
-    chart: helm-charts/external-dns
     targetRevision: HEAD
+    path: helm-charts/external-dns
 
     helm:
       values: |
         provider:
           name: aws
 
-        policy: sync
+        aws:
+          region: us-east-1
 
         txtOwnerId: prod-eks-cluster
 
-        domainFilters:
-          - example.com
+        policy: sync
 
         serviceAccount:
           create: true

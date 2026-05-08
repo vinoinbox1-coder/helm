@@ -1,4 +1,4 @@
-replicaCount: 100
+replicaCount: 200
 
 image:
   repository: nginx

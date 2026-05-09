@@ -15,8 +15,7 @@ spec:
 
     helm:
       skipCrds: false
-      
-    helm:
+
       valuesObject:
 
         grafana:
@@ -48,3 +47,15 @@ spec:
 
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
+
+  ignoreDifferences:
+    - group: monitoring.coreos.com
+      kind: Alertmanager
+      jsonPointers:
+        - /status
+
+    - group: monitoring.coreos.com
+      kind: Prometheus
+      jsonPointers:
+        - /status

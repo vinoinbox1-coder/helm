@@ -27,28 +27,17 @@ ingress:
 persistence:
   enabled: true
 
-  # StorageClass Configuration
+  # StorageClass name
   storageClass: efs-sc
 
-  provisioningMode: efs-ap
-
-  fileSystemId: fs-03acc169816429b30
-
-  directoryPerms: "700"
-
-  mountOptions:
-    - tls
-
-  reclaimPolicy: Retain
-
-  volumeBindingMode: Immediate
-
-  # PVC Configuration
+  # PVC settings
   accessMode: ReadWriteMany
-
   size: 10Gi
 
-  # Container Mount Path
+  # Existing PVC name
+  existingClaim: nginx-app-pvc
+
+  # Container mount path
   mountPath: /usr/share/nginx/html
 
 resources: {}

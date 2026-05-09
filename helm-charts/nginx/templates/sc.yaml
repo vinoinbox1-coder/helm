@@ -9,17 +9,15 @@ metadata:
 provisioner: efs.csi.aws.com
 
 parameters:
-  provisioningMode: {{ .Values.persistence.provisioningMode }}
-  fileSystemId: {{ .Values.persistence.fileSystemId }}
-  directoryPerms: "{{ .Values.persistence.directoryPerms }}"
+  provisioningMode: efs-ap
+  fileSystemId: fs-03acc169816429b30
+  directoryPerms: "700"
 
 mountOptions:
-{{- range .Values.persistence.mountOptions }}
-  - {{ . }}
-{{- end }}
+  - tls
 
-reclaimPolicy: {{ .Values.persistence.reclaimPolicy }}
+reclaimPolicy: Retain
 
-volumeBindingMode: {{ .Values.persistence.volumeBindingMode }}
+volumeBindingMode: Immediate
 
 {{- end }}

@@ -24,4 +24,31 @@ ingress:
         - path: /
           pathType: Prefix
 
+persistence:
+  enabled: true
+
+  # StorageClass Configuration
+  storageClass: efs-sc
+
+  provisioningMode: efs-ap
+
+  fileSystemId: fs-03acc169816429b30
+
+  directoryPerms: "700"
+
+  mountOptions:
+    - tls
+
+  reclaimPolicy: Retain
+
+  volumeBindingMode: Immediate
+
+  # PVC Configuration
+  accessMode: ReadWriteMany
+
+  size: 10Gi
+
+  # Container Mount Path
+  mountPath: /usr/share/nginx/html
+
 resources: {}

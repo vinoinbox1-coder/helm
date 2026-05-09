@@ -19,6 +19,7 @@ spec:
     spec:
       containers:
         - name: nginx
+
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
 
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -26,5 +27,18 @@ spec:
           ports:
             - containerPort: 80
 
+{{- if .Values.persistence.enabled }}
+          volumeMounts:
+            - name: efs-storage
+              mountPath: {{ .Values.persistence.mountPath }}
+{{- end }}
+
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+
+{{- if .Values.persistence.enabled }}
+      volumes:
+        - name: efs-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim }}
+{{- end }}

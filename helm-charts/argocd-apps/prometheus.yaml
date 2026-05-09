@@ -16,26 +16,6 @@ spec:
     helm:
       skipCrds: false
 
-      valuesObject:
-
-        grafana:
-          adminPassword: admin123
-
-          ingress:
-            enabled: true
-            ingressClassName: alb
-
-            annotations:
-              alb.ingress.kubernetes.io/scheme: internet-facing
-              alb.ingress.kubernetes.io/target-type: ip
-
-            hosts:
-              - grafana.local
-
-        prometheus:
-          prometheusSpec:
-            retention: 7d
-
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -48,14 +28,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-
-  ignoreDifferences:
-    - group: monitoring.coreos.com
-      kind: Alertmanager
-      jsonPointers:
-        - /status
-
-    - group: monitoring.coreos.com
-      kind: Prometheus
-      jsonPointers:
-        - /status
+      - Replace=true

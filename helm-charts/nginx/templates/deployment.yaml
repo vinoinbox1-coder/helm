@@ -32,7 +32,7 @@ spec:
           ports:
             - containerPort: 80
 
-# {{- if .Values.persistence.enabled }}
+# {{- if and .Values.persistence .Values.persistence.enabled }}
 #           volumeMounts:
 #             - name: efs-storage
 #               mountPath: {{ .Values.persistence.mountPath }}
@@ -41,7 +41,7 @@ spec:
 #           resources:
 # {{ toYaml .Values.resources | indent 12 }}
 
-# {{- if .Values.persistence.enabled }}
+# {{- if and .Values.persistence .Values.persistence.enabled }}
 #       volumes:
 #         - name: efs-storage
 #           persistentVolumeClaim:

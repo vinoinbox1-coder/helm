@@ -32,8 +32,8 @@ ingress:
 # # PERSISTENT VOLUME CLAIM (PVC) CONFIGURATION
 # # =========================================================
 
-# persistence:
-#   enabled: true
+persistence:
+  enabled: false
 
 #   # Existing PVC name
 #   existingClaim: nginx-app-pvc

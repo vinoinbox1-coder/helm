@@ -1,9 +1,15 @@
+# =========================================================
+# POD / APPLICATION CONFIGURATION
+# =========================================================
+
 replicaCount: 1
 
 image:
   repository: nginx
   tag: latest
   pullPolicy: IfNotPresent
+
+resources: {}
 
 service:
   type: ClusterIP
@@ -24,20 +30,42 @@ ingress:
         - path: /
           pathType: Prefix
 
+
+# =========================================================
+# PERSISTENT VOLUME CLAIM (PVC) CONFIGURATION
+# =========================================================
+
 persistence:
   enabled: true
 
-  # StorageClass name
-  storageClass: efs-sc
+  # Existing PVC name
+  existingClaim: nginx-app-pvc
 
   # PVC settings
   accessMode: ReadWriteMany
   size: 10Gi
 
-  # Existing PVC name
-  existingClaim: nginx-app-pvc
-
   # Container mount path
   mountPath: /usr/share/nginx/html
 
-resources: {}
+
+# =========================================================
+# STORAGECLASS CONFIGURATION
+# =========================================================
+
+storageClass:
+  name: efs-sc
+
+  provisioner: efs.csi.aws.com
+
+  parameters:
+    provisioningMode: efs-ap
+    fileSystemId: fs-03acc169816429b30
+    directoryPerms: "700"
+
+  mountOptions:
+    - tls
+
+  reclaimPolicy: Retain
+
+  volumeBindingMode: Immediate

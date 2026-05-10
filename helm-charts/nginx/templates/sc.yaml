@@ -1,23 +1,23 @@
-{{- if .Values.persistence.enabled }}
+# {{- if .Values.persistence.enabled }}
 
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
 
-metadata:
-  name: {{ .Values.persistence.storageClass }}
+# metadata:
+#   name: {{ .Values.persistence.storageClass }}
 
-provisioner: efs.csi.aws.com
+# provisioner: efs.csi.aws.com
 
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: fs-03acc169816429b30
-  directoryPerms: "700"
+# parameters:
+#   provisioningMode: efs-ap
+#   fileSystemId: fs-03acc169816429b30
+#   directoryPerms: "700"
 
-mountOptions:
-  - tls
+# mountOptions:
+#   - tls
 
-reclaimPolicy: Retain
+# reclaimPolicy: Retain
 
-volumeBindingMode: Immediate
+# volumeBindingMode: Immediate
 
-{{- end }}
+# {{- end }}

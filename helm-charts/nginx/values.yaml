@@ -16,7 +16,7 @@ service:
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
 
   className: alb
 
@@ -25,47 +25,46 @@ ingress:
     alb.ingress.kubernetes.io/target-type: ip
 
   hosts:
-    - host: nginx.yourdomain.com
-      paths:
+    - paths:
         - path: /
           pathType: Prefix
 
 
-# =========================================================
-# PERSISTENT VOLUME CLAIM (PVC) CONFIGURATION
-# =========================================================
+# # =========================================================
+# # PERSISTENT VOLUME CLAIM (PVC) CONFIGURATION
+# # =========================================================
 
-persistence:
-  enabled: true
+# persistence:
+#   enabled: true
 
-  # Existing PVC name
-  existingClaim: nginx-app-pvc
+#   # Existing PVC name
+#   existingClaim: nginx-app-pvc
 
-  # PVC settings
-  accessMode: ReadWriteMany
-  size: 10Gi
+#   # PVC settings
+#   accessMode: ReadWriteMany
+#   size: 10Gi
 
-  # Container mount path
-  mountPath: /usr/share/nginx/html
+#   # Container mount path
+#   mountPath: /usr/share/nginx/html
 
 
-# =========================================================
-# STORAGECLASS CONFIGURATION
-# =========================================================
+# # =========================================================
+# # STORAGECLASS CONFIGURATION
+# # =========================================================
 
-storageClass:
-  name: efs-sc
+# storageClass:
+#   name: efs-sc
 
-  provisioner: efs.csi.aws.com
+#   provisioner: efs.csi.aws.com
 
-  parameters:
-    provisioningMode: efs-ap
-    fileSystemId: fs-03acc169816429b30
-    directoryPerms: "700"
+#   parameters:
+#     provisioningMode: efs-ap
+#     fileSystemId: fs-03acc169816429b30
+#     directoryPerms: "700"
 
-  mountOptions:
-    - tls
+#   mountOptions:
+#     - tls
 
-  reclaimPolicy: Retain
+#   reclaimPolicy: Retain
 
-  volumeBindingMode: Immediate
+#   volumeBindingMode: Immediate

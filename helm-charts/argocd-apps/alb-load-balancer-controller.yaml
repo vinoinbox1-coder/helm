@@ -24,6 +24,9 @@ spec:
           annotations:
             eks.amazonaws.com/role-arn: arn:aws:iam::757933576142:role/aws-load-balancer-controller
 
+        extraArgs:
+          enable-gateway-api: "true"
+
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system

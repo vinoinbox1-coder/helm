@@ -193,9 +193,9 @@ settings:
   # -- Cluster CA bundle for TLS configuration of provisioned nodes. If not set, this is taken from the controller's TLS configuration for the API server.
   clusterCABundle: ""
   # -- Cluster name.
-  clusterName: ""
+  clusterName: "prod-eks-cluster"
   # -- Cluster endpoint. If not set, will be discovered during startup (EKS only).
-  clusterEndpoint: ""
+  clusterEndpoint: "https://0EB4AF30A64E12D903A67E47FB1741F2.gr7.us-east-1.eks.amazonaws.com"
   # -- If true then assume we can't reach AWS services which don't have a VPC endpoint.
   # This also has the effect of disabling look-ups to the AWS pricing endpoint.
   isolatedVPC: false
@@ -206,7 +206,7 @@ settings:
   # -- Interruption queue is the name of the SQS queue used for processing interruption events from EC2.
   # Interruption handling is disabled if not specified. Enabling interruption handling may
   # require additional permissions on the controller service account. Additional permissions are outlined in the docs.
-  interruptionQueue: ""
+  interruptionQueue: "prod-eks-cluster"
   # -- Marking this true signals Karpenter to respect zonal shifts when making node claims.
   # More information about Zonal Shift here: https://docs.aws.amazon.com/eks/latest/userguide/zone-shift-enable.html#zone-shift-enable-steps
   enableZonalShift: false

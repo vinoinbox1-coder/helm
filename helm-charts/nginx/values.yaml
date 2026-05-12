@@ -2,7 +2,7 @@
 # POD / APPLICATION CONFIGURATION
 # =========================================================
 
-replicaCount: 1
+replicaCount: 100
 
 image:
   repository: nginx

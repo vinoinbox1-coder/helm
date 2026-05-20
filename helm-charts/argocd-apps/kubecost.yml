@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubecost
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://kubecost.github.io/cost-analyzer/
+    chart: cost-analyzer
+    targetRevision: 1.108.0
+
+    helm:
+      values: |
+        kubecostToken: ""
+
+        cloudProvider:
+          enabled: true
+          provider: aws
+
+        # ✅ FIX 1: Prometheus PVC
+        prometheus:
+          server:
+            retention: 15d
+            persistentVolume:
+              storageClass: gp2
+
+        # ✅ FIX 2: Kubecost main PVC (THIS WAS MISSING)
+        kubecost:
+          persistentVolume:
+            storageClass: gp2
+
+        # ✅ FIX 3: Global fallback (important)
+        persistentVolume:
+          storageClass: gp2
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubecost
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

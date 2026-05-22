@@ -21,7 +21,7 @@ spec:
         cloudProvider: aws
 
         autoDiscovery:
-          clusterName: prod-eks-cluster
+          clusterName: primary-eks-cluster
 
         rbac:
           serviceAccount:

@@ -8,4 +8,3 @@ allowVolumeExpansion: true
 parameters:
   type: gp3
   fsType: ext4
-  tags: "Name=nginx-ebs,App=nginx"

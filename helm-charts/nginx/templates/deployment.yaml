@@ -48,3 +48,11 @@ spec:
 #           persistentVolumeClaim:
 #             claimName: {{ .Values.persistence.existingClaim }}
 # {{- end }}
+          volumeMounts:
+            - name: app-storage
+              mountPath: /mnt
+
+          volumes:
+            - name: app-storage
+              persistentVolumeClaim:
+                claimName: gp3-pvc

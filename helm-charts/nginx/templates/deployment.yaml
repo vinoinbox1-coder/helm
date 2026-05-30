@@ -1,16 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
-  name: {{ .Chart.Name }}
-
+  name: nginx-app
 spec:
-  replicas: {{ .Values.replicaCount }}
-
+  replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
-
+      app: nginx-app
   template:
     metadata:
       annotations:
@@ -18,40 +14,25 @@ spec:
         instrumentation.opentelemetry.io/inject-python: "false"
         instrumentation.opentelemetry.io/inject-nodejs: "false"
         instrumentation.opentelemetry.io/inject-dotnet: "false"
-
       labels:
-        app: {{ .Chart.Name }}
-
+        app: nginx-app
     spec:
       containers:
         - name: nginx
-
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-
+          image: nginx:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
-
           resources:
-{{ toYaml .Values.resources | indent 12 }}
-
-# {{- if and .Values.persistence .Values.persistence.enabled }}
-#           volumeMounts:
-#             - name: efs-storage
-#               mountPath: {{ .Values.persistence.mountPath }}
-# {{- end }}
-
-# {{- if and .Values.persistence .Values.persistence.enabled }}
-#       volumes:
-#         - name: efs-storage
-#           persistentVolumeClaim:
-#             claimName: {{ .Values.persistence.existingClaim }}
-# {{- end }}
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           volumeMounts:
             - name: app-storage
               mountPath: /mnt
-
       volumes:
         - name: app-storage
           persistentVolumeClaim:

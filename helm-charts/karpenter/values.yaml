@@ -48,7 +48,7 @@ serviceMonitor:
   # the entire scrape will be treated as failed. 0 means no limit.
   sampleLimit: null
 # -- Number of replicas.
-replicas: 2
+replicas: 1
 # -- The number of old ReplicaSets to retain to allow rollback.
 revisionHistoryLimit: 10
 # -- Strategy for updating the pod.

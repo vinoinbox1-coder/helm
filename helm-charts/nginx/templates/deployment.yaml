@@ -37,3 +37,4 @@ spec:
         - name: app-storage
           persistentVolumeClaim:
             claimName: gp3-pvc
+      serviceAccountName: s3-sa

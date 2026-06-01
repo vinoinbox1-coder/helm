@@ -3,12 +3,17 @@ kind: EC2NodeClass
 metadata:
   name: default
 spec:
-  role: "KarpenterNodeRole-primary-eks-cluster"
+  role: KarpenterNodeRole-primary-eks-cluster
+
+  amiFamily: AL2023
+
   amiSelectorTerms:
     - id: ami-0ab7b9d465bbb3c47
+
   subnetSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "primary-eks-cluster" # replace with your cluster name
+        karpenter.sh/discovery: primary-eks-cluster
+
   securityGroupSelectorTerms:
     - tags:
-        karpenter.sh/discovery: "primary-eks-cluster" # replace with your cluster name
+        karpenter.sh/discovery: primary-eks-cluster

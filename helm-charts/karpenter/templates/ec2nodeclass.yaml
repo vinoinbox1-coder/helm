@@ -5,7 +5,7 @@ metadata:
 spec:
   role: "KarpenterNodeRole-primary-eks-cluster"
   amiSelectorTerms:
-    - alias: "al2023@latest"
+    - id: ami-0ab7b9d465bbb3c47
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "primary-eks-cluster" # replace with your cluster name
